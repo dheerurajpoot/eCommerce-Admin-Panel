@@ -1,0 +1,48 @@
+*{
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+body{
+  background-color: #f1f2f4;
+}
+.logo{
+  height: 32px;
+  Margin: 16px;
+}
+.logo img{
+  height: 40px;
+}
+.sm-logo{
+  display: none;
+  transition: all ease-in-out 0.3s;
+}
+.ant-layout-sider-collapsed .sm-logo{
+  display: block;
+  transition: all ease-in-out 0.3s;
+}
+.ant-layout-sider-collapsed .lg-logo{
+  display: none;
+}
+
+.ant-layout{
+  min-height: 100vh;
+}
+.admin-info h3{
+  line-height: 30px;
+  font-size: 18px;
+  font-weight: 600;
+  margin-bottom: 0px;
+}
+.admin-info p{
+  line-height: 20px;
+  margin-bottom: 0px;
+}
+.notification{
+  position: absolute;
+  top: -30px;
+  right: -5px;
+  color: #ff504e;
+  font-weight: 600;
+  font-size: 16px;
+}
