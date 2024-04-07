@@ -9,7 +9,7 @@ import { RiListOrdered2 } from "react-icons/ri";
 import { MdArticle } from "react-icons/md";
 import { BiSolidCategoryAlt } from "react-icons/bi";
 import { MdLiveHelp } from "react-icons/md";
-import { Outlet } from "react-router-dom";
+import { Link, Outlet } from "react-router-dom";
 import { BsBoxArrowInLeft } from "react-icons/bs";
 import { BsBoxArrowInRight } from "react-icons/bs";
 import { IoNotifications } from "react-icons/io5";
@@ -28,7 +28,7 @@ const AdminLayout = () => {
 				<div className='logo'>
 					<img
 						className='lg-logo'
-						src='images/drstore.png'
+						src='./images/drstore.png'
 						alt='DR Store logo'
 					/>
 					<img
@@ -168,24 +168,37 @@ const AdminLayout = () => {
 							height: 64,
 						}}
 					/>
-					<div className='pr-8 flex gap-2 justify-center items-center'>
+					<div className='pr-8 flex gap-5 justify-center items-center'>
 						<div className='relative mx-3 cursor-pointer'>
 							<span className='notification'>2</span>
 							<IoNotifications className='text-2xl' />
 						</div>
-						<div>
-							<div>
-								<img
-									className='w-8'
-									src='images/drstoreicon.png'
-									alt='user profile'
-								/>
-							</div>
+						<div className='w-12 border rounded-full p-1'>
+							<img
+								className='w-[90%]'
+								src='./images/drstoreicon.png'
+								alt='user profile'
+							/>
 						</div>
-						<div>
-							<div className='admin-info flex flex-col justify-center'>
-								<h3>Dheeru Rajpoot</h3>
-								<p>rajpootdheeru90@gmail.com</p>
+
+						<div className='dropdown'>
+							<button className='dropbtn py-2'>
+								<p className='text-lg font-semibold'>
+									Dheeru Rajpoot <br />
+									<span className='text-sm font-light'>
+										rajpootdheeru90@gmail.com
+									</span>
+								</p>
+							</button>
+							<div className='dropdown-content'>
+								<Link to={"/"} className='drop-items'>
+									Profile
+								</Link>
+								<Link
+									to={"/sign-out"}
+									className='drop-items border-t-2'>
+									Sign Out
+								</Link>
 							</div>
 						</div>
 					</div>
