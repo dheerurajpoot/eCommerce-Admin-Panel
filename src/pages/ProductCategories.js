@@ -1,40 +1,41 @@
-import React from 'react'
-import { Table } from 'antd';
+import React, { useEffect } from "react";
+import { Table } from "antd";
+import { useDispatch, useSelector } from "react-redux";
+import { getCategory } from "../features/category/categorySlice";
 
-const Enquiries = () => {
-  const columns = [
-    {
-      title: 'S No.',
-      dataIndex: 'key',
-    },
-    {
-      title: 'Name',
-      dataIndex: 'name',
-    },
-    {
-      title: 'Product',
-      dataIndex: 'product',
-    },
-    {
-      title: 'Status',
-      dataIndex: 'status',
-    },
-  ];
-  const data = [];
-  for (let i = 0; i < 46; i++) {
-    data.push({
-      key: i,
-      name: `Edward King ${i}`,
-      product: 32,
-      status: `London, Park Lane no. ${i}`,
-    });
-  }
-  return (
-    <div className='my-5'>
-        <h2 className='text-xl my-4 font-bold'>All Categories</h2>
-        <Table columns={columns} dataSource={data} />
-      </div>
-  )
-}
+const columns = [
+	{
+		title: "S No.",
+		dataIndex: "key",
+	},
+	{
+		title: "Name",
+		dataIndex: "title",
+	},
+];
 
-export default Enquiries
+const ProductCategories = () => {
+	const dispatch = useDispatch();
+	useEffect(() => {
+		dispatch(getCategory());
+	}, [dispatch]);
+
+	const totalCategory = useSelector((state) => state.category.category);
+	const data = [];
+	for (let i = 0; i < totalCategory.length; i++) {
+		if (totalCategory) {
+			data.push({
+				key: i + 1,
+				title: totalCategory[i].title,
+			});
+		}
+	}
+	return (
+		<div className='my-5'>
+			<h2 className='text-xl my-4 font-bold'>All Categories</h2>
+			<Table columns={columns} dataSource={data} />
+		</div>
+	);
+};
+
+export default ProductCategories;

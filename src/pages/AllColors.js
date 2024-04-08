@@ -1,40 +1,40 @@
-import React from 'react'
-import { Table } from 'antd';
+import React, { useEffect } from "react";
+import { Table } from "antd";
+import { useDispatch, useSelector } from "react-redux";
+import { getColors } from "../features/color/colorSlice";
 
-const Enquiries = () => {
-  const columns = [
-    {
-      title: 'S No.',
-      dataIndex: 'key',
-    },
-    {
-      title: 'Name',
-      dataIndex: 'name',
-    },
-    {
-      title: 'Product',
-      dataIndex: 'product',
-    },
-    {
-      title: 'Status',
-      dataIndex: 'status',
-    },
-  ];
-  const data = [];
-  for (let i = 0; i < 46; i++) {
-    data.push({
-      key: i,
-      name: `Edward King ${i}`,
-      product: 32,
-      status: `London, Park Lane no. ${i}`,
-    });
-  }
-  return (
-    <div className='my-5'>
-        <h2 className='text-xl my-4 font-bold'>Colors</h2>
-        <Table columns={columns} dataSource={data} />
-      </div>
-  )
-}
+const columns = [
+	{
+		title: "S No.",
+		dataIndex: "key",
+	},
+	{
+		title: "Name",
+		dataIndex: "title",
+	},
+];
+const AllColors = () => {
+	const dispatch = useDispatch();
+	useEffect(() => {
+		dispatch(getColors());
+	}, [dispatch]);
 
-export default Enquiries
+	const totalColors = useSelector((state) => state.color.colors);
+	const data = [];
+	for (let i = 0; i < totalColors.length; i++) {
+		if (totalColors) {
+			data.push({
+				key: i + 1,
+				title: totalColors[i].title,
+			});
+		}
+	}
+	return (
+		<div className='my-5'>
+			<h2 className='text-xl my-4 font-bold'>Colors</h2>
+			<Table columns={columns} dataSource={data} />
+		</div>
+	);
+};
+
+export default AllColors;
