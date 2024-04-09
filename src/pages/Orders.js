@@ -18,6 +18,7 @@ const columns = [
 	{
 		title: "User Name",
 		dataIndex: "name",
+		sorter: (a, b) => a.name.length - b.name.length,
 	},
 	{
 		title: "Product",
@@ -34,6 +35,7 @@ const columns = [
 	{
 		title: "Ammount",
 		dataIndex: "ammount",
+		sorter: (a, b) => a.ammount.length - b.ammount.length,
 	},
 	{
 		title: "Payment ID",

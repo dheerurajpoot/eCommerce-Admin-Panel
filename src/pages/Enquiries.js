@@ -13,10 +13,12 @@ const columns = [
 	{
 		title: "Name",
 		dataIndex: "name",
+		sorter: (a, b) => a.name.length - b.name.length,
 	},
 	{
 		title: "Email",
 		dataIndex: "email",
+		sorter: (a, b) => a.email.length - b.email.length,
 	},
 	{
 		title: "Mobile",
@@ -29,6 +31,7 @@ const columns = [
 	{
 		title: "Status",
 		dataIndex: "status",
+		sorter: (a, b) => a.status.length - b.status.length,
 	},
 	{
 		title: "Date",
