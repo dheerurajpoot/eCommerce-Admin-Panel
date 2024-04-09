@@ -2,6 +2,9 @@ import React, { useEffect } from "react";
 import { Table } from "antd";
 import { getBrands } from "../features/brands/brandSlice";
 import { useDispatch, useSelector } from "react-redux";
+import { Link } from "react-router-dom";
+import { FaEdit } from "react-icons/fa";
+import { MdDeleteOutline } from "react-icons/md";
 
 const columns = [
 	{
@@ -12,6 +15,10 @@ const columns = [
 		title: "Name",
 		dataIndex: "title",
 		sorter: (a, b) => a.title.length - b.title.length,
+	},
+	{
+		title: "Action",
+		dataIndex: "action",
 	},
 ];
 const AllBrands = () => {
@@ -27,6 +34,18 @@ const AllBrands = () => {
 			data.push({
 				key: i + 1,
 				title: totalBrands[i].title,
+				action: (
+					<>
+						<div className='flex gap-3'>
+							<Link className='text-lg'>
+								<FaEdit />
+							</Link>
+							<Link className='text-xl'>
+								<MdDeleteOutline />
+							</Link>
+						</div>
+					</>
+				),
 			});
 		}
 	}
