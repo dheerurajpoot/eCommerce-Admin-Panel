@@ -268,7 +268,7 @@ const AddProduct = () => {
 									val={formik.values.brand}
 									onChange={formik.handleChange("brand")}
 									onBlur={formik.handleBlur("brand")}
-									id='countries'
+									id='brand'
 									className='bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 '>
 									<option>Choose a Brand</option>
 									{allBrands.map((i, index) => {

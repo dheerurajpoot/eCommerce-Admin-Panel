@@ -7,6 +7,7 @@ import categoryReducer from "../features/category/categorySlice";
 import colorReducer from "../features/color/colorSlice";
 import contactReducer from "../features/contact/contactSlice";
 import uploadReducer from "../features/upload/uploadSlice";
+import couponReducer from "../features/coupon/couponSlice";
 
 export const store = configureStore({
 	reducer: {
@@ -16,6 +17,7 @@ export const store = configureStore({
 		brand: brandReducer,
 		category: categoryReducer,
 		color: colorReducer,
+		coupon: couponReducer,
 		contact: contactReducer,
 		upload: uploadReducer,
 	},

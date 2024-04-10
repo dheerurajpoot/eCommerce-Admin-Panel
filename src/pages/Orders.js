@@ -66,7 +66,7 @@ const Orders = () => {
 				_id: getAllOrders[i]._id,
 				name: getAllOrders[i].orderBy.name,
 				product: getAllOrders[i].products.map((i, index) => {
-					return <p key={index}>{i.product.title}</p>;
+					return <p key={index}>{i?.product?.title}</p>;
 				}),
 				payment: getAllOrders[i].paymentIntent.method,
 				id: getAllOrders[i].paymentIntent.id,

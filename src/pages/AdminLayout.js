@@ -8,6 +8,7 @@ import { IoIosColorFill } from "react-icons/io";
 import { RiListOrdered2 } from "react-icons/ri";
 import { MdArticle } from "react-icons/md";
 import { BiSolidCategoryAlt } from "react-icons/bi";
+import { BiSolidOffer } from "react-icons/bi";
 import { MdLiveHelp } from "react-icons/md";
 import { Link, Outlet } from "react-router-dom";
 import { BsBoxArrowInLeft } from "react-icons/bs";
@@ -79,37 +80,29 @@ const AdminLayout = () => {
 								{
 									key: "all-products",
 									icon: <FaCartPlus />,
-									label: "All Products",
+									label: "Products",
 								},
-								{
-									key: "add-category",
-									icon: <MdCategory />,
-									label: "Add Category",
-								},
+
 								{
 									key: "all-category",
 									icon: <MdCategory />,
-									label: "All Category",
+									label: "Category",
 								},
-								{
-									key: "add-brands",
-									icon: <SiBrandfolder />,
-									label: "Add Brands",
-								},
+
 								{
 									key: "all-brands",
 									icon: <SiBrandfolder />,
-									label: "All Brands",
+									label: "Brands",
 								},
 								{
-									key: "add-colors",
-									icon: <IoIosColorFill />,
-									label: "Add Colors",
+									key: "coupon",
+									icon: <BiSolidOffer />,
+									label: "Coupon",
 								},
 								{
 									key: "all-colors",
 									icon: <IoIosColorFill />,
-									label: "All Colors",
+									label: "Colors",
 								},
 							],
 						},
