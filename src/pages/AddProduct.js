@@ -54,7 +54,6 @@ const AddProduct = () => {
 			formik.resetForm();
 			setColor(null);
 			setTimeout(() => {
-				// dispatch();
 				navigate("/admin/all-products");
 			}, 3000);
 		},
@@ -64,7 +63,6 @@ const AddProduct = () => {
 		dispatch(getBrands());
 		dispatch(getCategory());
 		dispatch(getColors());
-		// formik.values.color = color;
 	}, [dispatch]);
 	const allBrands = useSelector((state) => state.brand.brands);
 	const allCategory = useSelector((state) => state.category.category);
@@ -87,7 +85,7 @@ const AddProduct = () => {
 	allColors.forEach((i) => {
 		colorOptions.push({
 			label: i.title,
-			value: i._id,
+			value: i.title,
 		});
 	});
 	const handleColor = (e) => {
@@ -202,7 +200,7 @@ const AddProduct = () => {
 							</div>
 						</div>
 
-						<div className='mb-5'>
+						<div>
 							<h2 className='text-lg mb-2 font-medium'>
 								Product Images
 							</h2>

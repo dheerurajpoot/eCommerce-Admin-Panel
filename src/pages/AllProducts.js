@@ -73,8 +73,7 @@ const AllProducts = () => {
 				price: `₹ ${totalProducts[i].price}`,
 				brand: totalProducts[i].brand,
 				color: totalProducts[i].color.map((cVal, index) => {
-					console.log(cVal.color);
-					return <p key={index}>{cVal.color}</p>;
+					return <p key={index}>{cVal}</p>;
 				}),
 				category: totalProducts[i].category,
 				quantity: totalProducts[i].quantity,
