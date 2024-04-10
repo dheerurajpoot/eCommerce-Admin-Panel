@@ -51,10 +51,28 @@ const AllBrands = () => {
 	}
 
 	return (
-		<div className='my-5'>
-			<h2 className='text-xl my-4 font-bold'>Brands</h2>
-			<Table columns={columns} dataSource={data} />
-		</div>
+		<>
+			<section className='flex gap-5'>
+				<div className='w-[30%] pl-8'>
+					<h2 className='text-xl my-4 font-bold'>Add Brand</h2>
+
+					<div className='flex items-center gap-7'>
+						<input
+							className='w-[50%] px-3 py-3 border rounded text-sm'
+							type='text'
+							placeholder='Brand Name'
+						/>
+						<button className='bg-green-700 px-5  py-3 rounded text-white font-bold'>
+							Add Brand
+						</button>
+					</div>
+				</div>
+				<div className='w-[65%]'>
+					<h2 className='text-xl my-4 font-bold'>Brands</h2>
+					<Table columns={columns} dataSource={data} />
+				</div>
+			</section>
+		</>
 	);
 };
 

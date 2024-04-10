@@ -15,6 +15,8 @@ import { BsBoxArrowInRight } from "react-icons/bs";
 import { IoNotifications } from "react-icons/io5";
 import { Layout, Menu, Button, theme } from "antd";
 import { useNavigate } from "react-router-dom";
+import { ToastContainer } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 const { Header, Sider, Content } = Layout;
 const AdminLayout = () => {
 	const [collapsed, setCollapsed] = useState(false);
@@ -26,16 +28,22 @@ const AdminLayout = () => {
 		<Layout>
 			<Sider trigger={null} collapsible collapsed={collapsed}>
 				<div className='logo'>
-					<img
+					{/* <img
 						className='lg-logo'
 						src='./images/drstore.png'
 						alt='DR Store logo'
-					/>
-					<img
+					/> */}
+					<h2 className='lg-logo text-white text-3xl font-bold text-center'>
+						DR Store
+					</h2>
+					{/* <img
 						className='sm-logo'
 						src='images/drstoreicon.png'
 						alt='DR Store logo'
-					/>
+					/> */}
+					<h2 className='sm-logo text-white text-3xl font-bold text-center'>
+						DR
+					</h2>
 				</div>
 				<Menu
 					theme='dark'
@@ -173,12 +181,15 @@ const AdminLayout = () => {
 							<span className='notification'>2</span>
 							<IoNotifications className='text-2xl' />
 						</div>
-						<div className='w-12 border rounded-full p-1'>
-							<img
+						<div className='w-12 border bg-blue-950 rounded-full p-1'>
+							{/* <img
 								className='w-[90%]'
 								src='./images/drstoreicon.png'
 								alt='user profile'
-							/>
+							/> */}
+							<h2 className='text-2xl text-white font-bold text-center'>
+								DR
+							</h2>
 						</div>
 
 						<div className='dropdown'>
@@ -190,7 +201,7 @@ const AdminLayout = () => {
 									</span>
 								</p>
 							</button>
-							<div className='dropdown-content'>
+							<div className='dropdown-content font-semibold'>
 								<Link to={"/"} className='drop-items'>
 									Profile
 								</Link>
@@ -211,6 +222,18 @@ const AdminLayout = () => {
 						background: colorBgContainer,
 						borderRadius: borderRadiusLG,
 					}}>
+					<ToastContainer
+						position='top-right'
+						autoClose={250}
+						hideProgressBar={false}
+						newestOnTop={true}
+						closeOnClick
+						rtl={false}
+						pauseOnFocusLoss
+						draggable
+						pauseOnHover
+						theme='light'
+					/>
 					<Outlet />
 				</Content>
 			</Layout>

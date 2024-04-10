@@ -98,21 +98,25 @@ const Dashboard = () => {
 			<h2 className='text-xl font-bold'>Dashboard</h2>
 			<section>
 				<div className='flex justify-center items-center gap-10 my-8'>
-					<div className='w-[30%] shadow-lg border rounded flex justify-center items-center'>
+					<div className='w-[20%] shadow-lg border rounded flex justify-center items-center'>
 						<div>
 							<p className='my-5 text-gray-400'>Total Sells</p>
-							<h3 className='text-2xl font-bold my-5'>$3878</h3>
+							<h3 className='text-2xl text-green-700 font-bold my-5'>
+								₹ 3878
+							</h3>
 						</div>
 					</div>
-					<div className='w-[30%] shadow-lg border rounded flex justify-center items-center'>
+					<div className='w-[20%] shadow-lg border rounded flex justify-center items-center'>
 						<div>
 							<p className='my-5 text-gray-400'>
 								Average Order Value
 							</p>
-							<h3 className='text-2xl font-bold my-5'>$378</h3>
+							<h3 className='text-2xl font-bold text-green-700 my-5'>
+								₹ 378
+							</h3>
 						</div>
 					</div>
-					<div className='w-[30%] shadow-lg border rounded flex justify-center items-center'>
+					<div className='w-[20%] shadow-lg border rounded flex justify-center items-center'>
 						<div>
 							<p className='my-5 text-gray-400'>Total Orders</p>
 							<h3 className='text-2xl font-bold my-5'>
@@ -120,11 +124,19 @@ const Dashboard = () => {
 							</h3>
 						</div>
 					</div>
-					<div className='w-[30%] shadow-lg border rounded flex justify-center items-center'>
+					<div className='w-[20%] shadow-lg border rounded flex justify-center items-center'>
 						<div>
 							<p className='my-5 text-gray-400'>
 								Total Customers
 							</p>
+							<h3 className='text-2xl font-bold my-5'>
+								{getAllCustomers.length}
+							</h3>
+						</div>
+					</div>
+					<div className='w-[20%] shadow-lg border rounded flex justify-center items-center'>
+						<div>
+							<p className='my-5 text-gray-400'>Total Products</p>
 							<h3 className='text-2xl font-bold my-5'>
 								{getAllCustomers.length}
 							</h3>

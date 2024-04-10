@@ -61,7 +61,8 @@ const AllProducts = () => {
 		dispatch(getProducts());
 	}, [dispatch]);
 
-	const totalProducts = useSelector((state) => state.product.products);
+	const totalProduct = useSelector((state) => state.product.products);
+	const totalProducts = [...totalProduct].reverse();
 	const data = [];
 	for (let i = 0; i < totalProducts.length; i++) {
 		if (totalProducts) {
@@ -71,7 +72,10 @@ const AllProducts = () => {
 				description: totalProducts[i].description,
 				price: `₹ ${totalProducts[i].price}`,
 				brand: totalProducts[i].brand,
-				color: totalProducts[i].color,
+				color: totalProducts[i].color.map((cVal, index) => {
+					console.log(cVal.color);
+					return <p key={index}>{cVal.color}</p>;
+				}),
 				category: totalProducts[i].category,
 				quantity: totalProducts[i].quantity,
 				sold: totalProducts[i].sold,

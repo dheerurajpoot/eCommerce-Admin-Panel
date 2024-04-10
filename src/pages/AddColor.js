@@ -5,7 +5,8 @@ const AddColor = () => {
 		<>
 			<section className='mx-10'>
 				<div>
-					<h2 className='text-2xl font-medium'>Add Color </h2>
+					<h2 className='text-xl my-4 font-bold'>Add Colors</h2>
+
 					<input
 						className='w-[10%] h-14 my-5 border rounded text-lg'
 						type='color'
