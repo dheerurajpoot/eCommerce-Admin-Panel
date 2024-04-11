@@ -11,7 +11,16 @@ export const getCoupons = createAsyncThunk(
 		}
 	}
 );
-
+export const createCoupon = createAsyncThunk(
+	"coupon/create-coupon",
+	async (couponData, thunkAPI) => {
+		try {
+			return await couponService.createCoupon(couponData);
+		} catch (error) {
+			return thunkAPI.rejectWithValue(error);
+		}
+	}
+);
 const initialState = {
 	coupons: [],
 	isError: false,
@@ -36,6 +45,21 @@ export const couponSlice = createSlice({
 				state.coupons = action.payload;
 			})
 			.addCase(getCoupons.rejected, (state, action) => {
+				state.isLoading = false;
+				state.isError = true;
+				state.isSuccess = false;
+				state.message = action.error;
+			})
+			.addCase(createCoupon.pending, (state) => {
+				state.isLoading = true;
+			})
+			.addCase(createCoupon.fulfilled, (state, action) => {
+				state.isLoading = false;
+				state.isError = false;
+				state.isSuccess = true;
+				state.createdCoupon = action.payload;
+			})
+			.addCase(createCoupon.rejected, (state, action) => {
 				state.isLoading = false;
 				state.isError = true;
 				state.isSuccess = false;

@@ -11,8 +11,17 @@ const getCoupons = async () => {
 		throw error;
 	}
 };
-
+const createCoupon = async (coupon) => {
+	try {
+		const response = await axios.post(`${base_url}coupon/`, coupon, config);
+		return response.data;
+	} catch (error) {
+		console.error("Error creating coupon:", error);
+		throw error;
+	}
+};
 const couponService = {
 	getCoupons,
+	createCoupon,
 };
 export default couponService;

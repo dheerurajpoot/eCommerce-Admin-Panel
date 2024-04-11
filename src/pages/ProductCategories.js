@@ -1,10 +1,20 @@
 import React, { useEffect } from "react";
 import { Table } from "antd";
 import { useDispatch, useSelector } from "react-redux";
-import { getCategory } from "../features/category/categorySlice";
+import {
+	createCategory,
+	getCategory,
+} from "../features/category/categorySlice";
 import { Link } from "react-router-dom";
 import { FaEdit } from "react-icons/fa";
 import { MdDeleteOutline } from "react-icons/md";
+import { useFormik } from "formik";
+import * as Yup from "yup";
+import { toast } from "react-toastify";
+
+let userSchema = Yup.object().shape({
+	title: Yup.string().required("Category Name is Required"),
+});
 
 const columns = [
 	{
@@ -28,7 +38,33 @@ const ProductCategories = () => {
 		dispatch(getCategory());
 	}, [dispatch]);
 
+	const formik = useFormik({
+		initialValues: {
+			title: "",
+		},
+		validationSchema: userSchema,
+		onSubmit: (values) => {
+			dispatch(createCategory(values));
+			formik.resetForm();
+			setTimeout(() => {
+				window.location.reload();
+			}, 1000);
+		},
+	});
+
 	const totalCategory = useSelector((state) => state.category.category);
+	const newState = useSelector((state) => state.category);
+	const { isSuccess, isError, isLoading, createdCategory } = newState;
+
+	useEffect(() => {
+		if (isSuccess && createdCategory) {
+			toast.success("Category Added Successfully!");
+		}
+		if (isError) {
+			toast.error("Something Went Wrong!");
+		}
+	}, [isSuccess, isError, isLoading, createdCategory]);
+
 	const data = [];
 	for (let i = 0; i < totalCategory.length; i++) {
 		if (totalCategory) {
@@ -56,15 +92,27 @@ const ProductCategories = () => {
 				<div className='w-[30%] pl-8'>
 					<h2 className='text-xl my-4 font-bold'>Add Category</h2>
 
-					<div className='flex items-center gap-7'>
+					<form
+						action='#'
+						onSubmit={formik.handleSubmit}
+						className='flex items-center gap-7'>
 						<input
 							className='w-[50%] px-3 py-3 border rounded text-sm'
 							type='text'
 							placeholder='Category Name'
+							name='title'
+							value={formik.values.title}
+							onChange={formik.handleChange("title")}
+							onBlur={formik.handleBlur("title")}
 						/>
-						<button className='bg-green-700 px-5  py-3 rounded text-white font-bold'>
+						<button
+							type='submit'
+							className='bg-green-700 px-5  py-3 rounded text-white font-bold'>
 							Add Category
 						</button>
+					</form>
+					<div className='error'>
+						{formik.touched.title && formik.errors.title}
 					</div>
 				</div>
 				<div className='w-[65%]'>

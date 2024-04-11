@@ -7,7 +7,7 @@ const getProducts = async () => {
 		const response = await axios.get(`${base_url}product/allproducts`);
 		return response.data;
 	} catch (error) {
-		console.error("Error fetching users:", error);
+		console.error("Error fetching products:", error);
 		throw error;
 	}
 };
@@ -20,7 +20,7 @@ const createProducts = async (product) => {
 		);
 		return response.data;
 	} catch (error) {
-		console.error("Error fetching users:", error);
+		console.error("Error creating brand:", error);
 		throw error;
 	}
 };

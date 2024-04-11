@@ -26,7 +26,7 @@ const AdminLayout = () => {
 	} = theme.useToken();
 	const navigate = useNavigate();
 	return (
-		<Layout>
+		<Layout /* onContextMenu={(e) => e.preventDefault()} */>
 			<Sider trigger={null} collapsible collapsed={collapsed}>
 				<div className='logo'>
 					{/* <img
@@ -94,11 +94,7 @@ const AdminLayout = () => {
 									icon: <SiBrandfolder />,
 									label: "Brands",
 								},
-								{
-									key: "coupon",
-									icon: <BiSolidOffer />,
-									label: "Coupon",
-								},
+
 								{
 									key: "all-colors",
 									icon: <IoIosColorFill />,
@@ -110,6 +106,18 @@ const AdminLayout = () => {
 							key: "orders",
 							icon: <RiListOrdered2 />,
 							label: "Orders",
+						},
+						{
+							key: "Marketing",
+							icon: <BiSolidOffer />,
+							label: "Marketing",
+							children: [
+								{
+									key: "coupon",
+									icon: <BiSolidOffer />,
+									label: "Coupon",
+								},
+							],
 						},
 						{
 							key: "Blog",
