@@ -78,25 +78,25 @@ const AdminLayout = () => {
 									label: "Add Products",
 								},
 								{
-									key: "all-products",
+									key: "products",
 									icon: <FaCartPlus />,
 									label: "Products",
 								},
 
 								{
-									key: "all-category",
+									key: "categories",
 									icon: <MdCategory />,
 									label: "Category",
 								},
 
 								{
-									key: "all-brands",
+									key: "brands",
 									icon: <SiBrandfolder />,
 									label: "Brands",
 								},
 
 								{
-									key: "all-colors",
+									key: "colors",
 									icon: <IoIosColorFill />,
 									label: "Colors",
 								},

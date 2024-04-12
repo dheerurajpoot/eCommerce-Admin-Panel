@@ -29,15 +29,12 @@ function App() {
 				<Route path='/admin' element={<AdminLayout />}>
 					<Route index element={<Dashboard />} />
 					<Route path='customers' element={<Customers />} />
-					<Route path='all-products' element={<AllProducts />} />
+					<Route path='products' element={<AllProducts />} />
 					<Route path='add-product' element={<AddProduct />} />
-					<Route
-						path='all-category'
-						element={<ProductCategories />}
-					/>
-					<Route path='all-brands' element={<AllBrands />} />
+					<Route path='categories' element={<ProductCategories />} />
+					<Route path='brands' element={<AllBrands />} />
 					<Route path='coupon' element={<Coupon />} />
-					<Route path='all-colors' element={<AllColors />} />
+					<Route path='colors' element={<AllColors />} />
 					<Route path='orders' element={<Orders />} />
 					<Route path='enquiries' element={<Enquiries />} />
 					<Route path='all-blogs' element={<Blogs />} />

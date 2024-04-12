@@ -50,11 +50,11 @@ const AddProduct = () => {
 		validationSchema: userSchema,
 		onSubmit: (values) => {
 			dispatch(createProducts(values));
-			// alert(JSON.stringify(values));
 			formik.resetForm();
 			setColor(null);
+			setImages(null);
 			setTimeout(() => {
-				navigate("/admin/all-products");
+				navigate("/admin/products");
 			}, 3000);
 		},
 	});

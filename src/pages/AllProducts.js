@@ -94,7 +94,6 @@ const AllProducts = () => {
 			});
 		}
 	}
-
 	return (
 		<div className='my-5'>
 			<h2 className='text-xl my-4 font-bold'>All Products</h2>
