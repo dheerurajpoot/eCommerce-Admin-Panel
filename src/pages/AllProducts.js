@@ -1,10 +1,11 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import { Table } from "antd";
 import { useDispatch, useSelector } from "react-redux";
-import { getProducts } from "../features/products/productSlice";
+import { deleteProduct, getProducts } from "../features/products/productSlice";
 import { Link } from "react-router-dom";
 import { FaEdit } from "react-icons/fa";
 import { MdDeleteOutline } from "react-icons/md";
+import CustomModel from "../components/CustomModel";
 
 const columns = [
 	{
@@ -85,20 +86,51 @@ const AllProducts = () => {
 							<Link className='text-lg'>
 								<FaEdit />
 							</Link>
-							<Link className='text-xl'>
+							<button
+								onClick={() => showModal(totalProducts[i]._id)}
+								className='text-xl border-0 bg-transparent'>
 								<MdDeleteOutline />
-							</Link>
+							</button>
 						</div>
 					</>
 				),
 			});
 		}
 	}
+	const [open, setOpen] = useState(false);
+	const [productId, setProductId] = useState("");
+	const showModal = (e) => {
+		setOpen(true);
+		setProductId(e);
+	};
+
+	const hideModal = () => {
+		setOpen(false);
+	};
+
+	const deleteProductData = (e) => {
+		setOpen(false);
+		dispatch(deleteProduct(e));
+
+		setTimeout(() => {
+			dispatch(getProducts());
+		}, 200);
+	};
 	return (
-		<div className='my-5'>
-			<h2 className='text-xl my-4 font-bold'>All Products</h2>
-			<Table columns={columns} dataSource={data} />
-		</div>
+		<>
+			<div className='my-5'>
+				<h2 className='text-xl my-4 font-bold'>All Products</h2>
+				<Table columns={columns} dataSource={data} />
+			</div>
+			<CustomModel
+				hideModal={hideModal}
+				open={open}
+				btnAction={() => {
+					deleteProductData(productId);
+				}}
+				title='Are yo sure, do you want to delete this Product?'
+			/>
+		</>
 	);
 };
 

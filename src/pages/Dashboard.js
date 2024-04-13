@@ -47,10 +47,6 @@ const columns = [
 		title: "Date",
 		dataIndex: "date",
 	},
-	{
-		title: "Action",
-		dataIndex: "action",
-	},
 ];
 
 const Dashboard = () => {
@@ -77,18 +73,6 @@ const Dashboard = () => {
 				ammount: `₹ ${getAllOrders[i].paymentIntent.ammount}`,
 				orderStatus: getAllOrders[i].orderStatus,
 				date: new Date(getAllOrders[i].createdAt).toLocaleString(),
-				action: (
-					<>
-						<div className='flex gap-3'>
-							<Link className='text-lg'>
-								<FaEdit />
-							</Link>
-							<Link className='text-xl'>
-								<MdDeleteOutline />
-							</Link>
-						</div>
-					</>
-				),
 			});
 		}
 	}

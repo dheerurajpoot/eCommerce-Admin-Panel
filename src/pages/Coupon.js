@@ -1,13 +1,18 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import { Table } from "antd";
 import { useDispatch, useSelector } from "react-redux";
 import { Link } from "react-router-dom";
 import { FaEdit } from "react-icons/fa";
 import { MdDeleteOutline } from "react-icons/md";
-import { createCoupon, getCoupons } from "../features/coupon/couponSlice";
+import {
+	createCoupon,
+	deleteCoupon,
+	getCoupons,
+} from "../features/coupon/couponSlice";
 import { useFormik } from "formik";
 import * as Yup from "yup";
 import { toast } from "react-toastify";
+import CustomModel from "../components/CustomModel";
 
 let userSchema = Yup.object().shape({
 	name: Yup.string().required("Coupon Name is Required"),
@@ -56,8 +61,8 @@ const Coupon = () => {
 			dispatch(createCoupon(values));
 			formik.resetForm();
 			setTimeout(() => {
-				window.location.reload();
-			}, 1000);
+				dispatch(getCoupons());
+			}, 200);
 		},
 	});
 
@@ -88,9 +93,11 @@ const Coupon = () => {
 							<Link className='text-lg'>
 								<FaEdit />
 							</Link>
-							<Link className='text-xl'>
+							<button
+								onClick={() => showModal(totalCoupons[i]._id)}
+								className='text-xl border-0 bg-transparent'>
 								<MdDeleteOutline />
-							</Link>
+							</button>
 						</div>
 					</>
 				),
@@ -98,6 +105,25 @@ const Coupon = () => {
 		}
 	}
 
+	const [open, setOpen] = useState(false);
+	const [couponId, setCouponId] = useState("");
+	const showModal = (e) => {
+		setOpen(true);
+		setCouponId(e);
+	};
+
+	const hideModal = () => {
+		setOpen(false);
+	};
+
+	const deleteCouponData = (e) => {
+		setOpen(false);
+		dispatch(deleteCoupon(e));
+
+		setTimeout(() => {
+			dispatch(getCoupons());
+		}, 200);
+	};
 	return (
 		<>
 			<section className='flex gap-5'>
@@ -155,6 +181,14 @@ const Coupon = () => {
 					<h2 className='text-xl my-4 font-bold'>Coupons</h2>
 					<Table columns={columns} dataSource={data} />
 				</div>
+				<CustomModel
+					hideModal={hideModal}
+					open={open}
+					btnAction={() => {
+						deleteCouponData(couponId);
+					}}
+					title='Are yo sure, do you want to delete this Coupon?'
+				/>
 			</section>
 		</>
 	);

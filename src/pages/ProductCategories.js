@@ -1,8 +1,9 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import { Table } from "antd";
 import { useDispatch, useSelector } from "react-redux";
 import {
 	createCategory,
+	deleteCategory,
 	getCategory,
 } from "../features/category/categorySlice";
 import { Link } from "react-router-dom";
@@ -11,6 +12,7 @@ import { MdDeleteOutline } from "react-icons/md";
 import { useFormik } from "formik";
 import * as Yup from "yup";
 import { toast } from "react-toastify";
+import CustomModel from "../components/CustomModel";
 
 let userSchema = Yup.object().shape({
 	title: Yup.string().required("Category Name is Required"),
@@ -47,8 +49,8 @@ const ProductCategories = () => {
 			dispatch(createCategory(values));
 			formik.resetForm();
 			setTimeout(() => {
-				window.location.reload();
-			}, 1000);
+				dispatch(getCategory());
+			}, 200);
 		},
 	});
 
@@ -77,15 +79,37 @@ const ProductCategories = () => {
 							<Link className='text-lg'>
 								<FaEdit />
 							</Link>
-							<Link className='text-xl'>
+							<button
+								onClick={() => showModal(totalCategory[i]._id)}
+								className='text-xl border-0 bg-transparent'>
 								<MdDeleteOutline />
-							</Link>
+							</button>
 						</div>
 					</>
 				),
 			});
 		}
 	}
+
+	const [open, setOpen] = useState(false);
+	const [categoryId, setCategoryId] = useState("");
+	const showModal = (e) => {
+		setOpen(true);
+		setCategoryId(e);
+	};
+
+	const hideModal = () => {
+		setOpen(false);
+	};
+
+	const deleteCategoryData = (e) => {
+		setOpen(false);
+		dispatch(deleteCategory(e));
+
+		setTimeout(() => {
+			dispatch(getCategory());
+		}, 200);
+	};
 	return (
 		<>
 			<section className='flex gap-5'>
@@ -119,6 +143,14 @@ const ProductCategories = () => {
 					<h2 className='text-xl my-4 font-bold'>All Categories</h2>
 					<Table columns={columns} dataSource={data} />
 				</div>
+				<CustomModel
+					hideModal={hideModal}
+					open={open}
+					btnAction={() => {
+						deleteCategoryData(categoryId);
+					}}
+					title='Are yo sure, do you want to delete this Category?'
+				/>
 			</section>
 		</>
 	);

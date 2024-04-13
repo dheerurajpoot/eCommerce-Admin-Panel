@@ -20,7 +20,16 @@ const createProducts = async (product) => {
 		);
 		return response.data;
 	} catch (error) {
-		console.error("Error creating brand:", error);
+		console.error("Error creating product:", error);
+		throw error;
+	}
+};
+const deleteProduct = async (id) => {
+	try {
+		const response = await axios.delete(`${base_url}product/${id}`, config);
+		return response.data;
+	} catch (error) {
+		console.error("Error in deleting product:", error);
 		throw error;
 	}
 };
@@ -28,5 +37,6 @@ const createProducts = async (product) => {
 const productService = {
 	getProducts,
 	createProducts,
+	deleteProduct,
 };
 export default productService;

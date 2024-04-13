@@ -1,6 +1,11 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import { Table } from "antd";
-import { createBrand, getBrands } from "../features/brands/brandSlice";
+import {
+	createBrand,
+	getBrands,
+	deleteBrand,
+	resetState,
+} from "../features/brands/brandSlice";
 import { useDispatch, useSelector } from "react-redux";
 import { Link } from "react-router-dom";
 import { FaEdit } from "react-icons/fa";
@@ -8,6 +13,7 @@ import { MdDeleteOutline } from "react-icons/md";
 import { useFormik } from "formik";
 import * as Yup from "yup";
 import { toast } from "react-toastify";
+import CustomModel from "../components/CustomModel";
 
 const columns = [
 	{
@@ -44,9 +50,10 @@ const AllBrands = () => {
 		onSubmit: (values) => {
 			dispatch(createBrand(values));
 			formik.resetForm();
+			dispatch(resetState());
 			setTimeout(() => {
-				window.location.reload();
-			}, 1000);
+				dispatch(getBrands());
+			}, 200);
 		},
 	});
 
@@ -74,15 +81,37 @@ const AllBrands = () => {
 							<Link className='text-lg'>
 								<FaEdit />
 							</Link>
-							<Link className='text-xl'>
+							<button
+								onClick={() => showModal(totalBrands[i]._id)}
+								className='text-xl border-0 bg-transparent'>
 								<MdDeleteOutline />
-							</Link>
+							</button>
 						</div>
 					</>
 				),
 			});
 		}
 	}
+
+	const [open, setOpen] = useState(false);
+	const [brandId, setBrandId] = useState("");
+	const showModal = (e) => {
+		setOpen(true);
+		setBrandId(e);
+	};
+
+	const hideModal = () => {
+		setOpen(false);
+	};
+
+	const deleteBrandData = (e) => {
+		setOpen(false);
+		dispatch(deleteBrand(e));
+
+		setTimeout(() => {
+			dispatch(getBrands());
+		}, 200);
+	};
 
 	return (
 		<>
@@ -116,6 +145,14 @@ const AllBrands = () => {
 					<h2 className='text-xl my-4 font-bold'>Brands</h2>
 					<Table columns={columns} dataSource={data} />
 				</div>
+				<CustomModel
+					hideModal={hideModal}
+					open={open}
+					btnAction={() => {
+						deleteBrandData(brandId);
+					}}
+					title='Are yo sure, do you want to delete this Brand?'
+				/>
 			</section>
 		</>
 	);

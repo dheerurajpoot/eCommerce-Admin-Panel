@@ -24,8 +24,21 @@ const createCategory = async (category) => {
 		throw error;
 	}
 };
+const deleteCategory = async (id) => {
+	try {
+		const response = await axios.delete(
+			`${base_url}category/${id}`,
+			config
+		);
+		return response.data;
+	} catch (error) {
+		console.error("Error in deleting category:", error);
+		throw error;
+	}
+};
 const categoryService = {
 	getCategory,
 	createCategory,
+	deleteCategory,
 };
 export default categoryService;

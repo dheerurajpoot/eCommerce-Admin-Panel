@@ -20,8 +20,18 @@ const createCoupon = async (coupon) => {
 		throw error;
 	}
 };
+const deleteCoupon = async (id) => {
+	try {
+		const response = await axios.delete(`${base_url}coupon/${id}`, config);
+		return response.data;
+	} catch (error) {
+		console.error("Error in deleting:", error);
+		throw error;
+	}
+};
 const couponService = {
 	getCoupons,
 	createCoupon,
+	deleteCoupon,
 };
 export default couponService;

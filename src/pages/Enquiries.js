@@ -1,9 +1,9 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import { Table } from "antd";
 import { useDispatch, useSelector } from "react-redux";
-import { getContacts } from "../features/contact/contactSlice";
-import { Link } from "react-router-dom";
+import { deleteContact, getContacts } from "../features/contact/contactSlice";
 import { MdDeleteOutline } from "react-icons/md";
+import CustomModel from "../components/CustomModel";
 
 const columns = [
 	{
@@ -77,20 +77,52 @@ const Enquiries = () => {
 				action: (
 					<>
 						<div>
-							<Link className='text-xl'>
+							<button
+								onClick={() => showModal(totalContacts[i]._id)}
+								className='text-xl border-0 bg-transparent'>
 								<MdDeleteOutline />
-							</Link>
+							</button>
 						</div>
 					</>
 				),
 			});
 		}
 	}
+
+	const [open, setOpen] = useState(false);
+	const [contactId, setContactId] = useState("");
+	const showModal = (e) => {
+		setOpen(true);
+		setContactId(e);
+	};
+
+	const hideModal = () => {
+		setOpen(false);
+	};
+
+	const deleteContactData = (e) => {
+		setOpen(false);
+		dispatch(deleteContact(e));
+
+		setTimeout(() => {
+			dispatch(getContacts());
+		}, 200);
+	};
 	return (
-		<div className='my-5'>
-			<h2 className='text-xl my-4 font-bold'>Enquiries</h2>
-			<Table columns={columns} dataSource={data} />
-		</div>
+		<>
+			<div className='my-5'>
+				<h2 className='text-xl my-4 font-bold'>Enquiries</h2>
+				<Table columns={columns} dataSource={data} />
+			</div>
+			<CustomModel
+				hideModal={hideModal}
+				open={open}
+				btnAction={() => {
+					deleteContactData(contactId);
+				}}
+				title='Are yo sure, do you want to delete this Enquiry?'
+			/>
+		</>
 	);
 };
 

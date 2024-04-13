@@ -34,17 +34,21 @@ const AdminLayout = () => {
 						src='./images/drstore.png'
 						alt='DR Store logo'
 					/> */}
-					<h2 className='lg-logo text-white text-3xl font-bold text-center'>
-						DR Store
-					</h2>
+					<Link to={"/admin"}>
+						<h2 className='lg-logo text-white text-3xl font-bold text-center'>
+							DR Store
+						</h2>
+					</Link>
 					{/* <img
 						className='sm-logo'
 						src='images/drstoreicon.png'
 						alt='DR Store logo'
 					/> */}
-					<h2 className='sm-logo text-white text-3xl font-bold text-center'>
-						DR
-					</h2>
+					<Link to={"/admin"}>
+						<h2 className='sm-logo text-white text-3xl font-bold text-center'>
+							DR
+						</h2>
+					</Link>
 				</div>
 				<Menu
 					theme='dark'
@@ -188,9 +192,11 @@ const AdminLayout = () => {
 								src='./images/drstoreicon.png'
 								alt='user profile'
 							/> */}
-							<h2 className='text-2xl text-white font-bold text-center'>
-								DR
-							</h2>
+							<Link to={"/admin"}>
+								<h2 className='text-2xl text-white font-bold text-center'>
+									DR
+								</h2>
+							</Link>
 						</div>
 
 						<div className='dropdown'>

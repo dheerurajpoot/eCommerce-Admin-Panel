@@ -20,8 +20,28 @@ const createBrand = async (brand) => {
 		throw error;
 	}
 };
+const getOneBrand = async (id) => {
+	try {
+		const response = await axios.get(`${base_url}brand/${id}`);
+		return response.data;
+	} catch (error) {
+		console.error("Error in geting a Brand:", error);
+		throw error;
+	}
+};
+const deleteBrand = async (id) => {
+	try {
+		const response = await axios.delete(`${base_url}brand/${id}`, config);
+		return response.data;
+	} catch (error) {
+		console.error("Error in deleting Brand:", error);
+		throw error;
+	}
+};
 const brandService = {
 	getBrands,
 	createBrand,
+	getOneBrand,
+	deleteBrand,
 };
 export default brandService;

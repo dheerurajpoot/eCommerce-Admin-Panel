@@ -20,8 +20,18 @@ const createColor = async (color) => {
 		throw error;
 	}
 };
+const deleteColor = async (id) => {
+	try {
+		const response = await axios.delete(`${base_url}color/${id}`, config);
+		return response.data;
+	} catch (error) {
+		console.error("Error creating color:", error);
+		throw error;
+	}
+};
 const colorService = {
 	getColors,
 	createColor,
+	deleteColor,
 };
 export default colorService;

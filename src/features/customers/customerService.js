@@ -11,8 +11,18 @@ const getUsers = async () => {
 		throw error;
 	}
 };
+const deleteUser = async (id) => {
+	try {
+		const response = await axios.delete(`${base_url}user/${id}`, config);
+		return response.data;
+	} catch (error) {
+		console.error("Error in deleting user:", error);
+		throw error;
+	}
+};
 
 const customerService = {
 	getUsers,
+	deleteUser,
 };
 export default customerService;

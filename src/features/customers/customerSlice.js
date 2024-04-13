@@ -11,6 +11,16 @@ export const getUsers = createAsyncThunk(
 		}
 	}
 );
+export const deleteUser = createAsyncThunk(
+	"customer/delete-customer",
+	async (id, thunkAPI) => {
+		try {
+			return await customerService.deleteUser(id);
+		} catch (error) {
+			return thunkAPI.rejectWithValue(error);
+		}
+	}
+);
 
 const initialState = {
 	customers: [],
@@ -36,6 +46,21 @@ export const customerSlice = createSlice({
 				state.customers = action.payload;
 			})
 			.addCase(getUsers.rejected, (state, action) => {
+				state.isLoading = false;
+				state.isError = true;
+				state.isSuccess = false;
+				state.message = action.error;
+			})
+			.addCase(deleteUser.pending, (state) => {
+				state.isLoading = true;
+			})
+			.addCase(deleteUser.fulfilled, (state, action) => {
+				state.isLoading = false;
+				state.isError = false;
+				state.isSuccess = true;
+				state.deletedCustomer = action.payload;
+			})
+			.addCase(deleteUser.rejected, (state, action) => {
 				state.isLoading = false;
 				state.isError = true;
 				state.isSuccess = false;

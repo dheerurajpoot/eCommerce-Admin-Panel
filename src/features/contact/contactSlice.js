@@ -11,6 +11,16 @@ export const getContacts = createAsyncThunk(
 		}
 	}
 );
+export const deleteContact = createAsyncThunk(
+	"contact/delete-contacts",
+	async (id, thunkAPI) => {
+		try {
+			return await contactService.deleteContact(id);
+		} catch (error) {
+			return thunkAPI.rejectWithValue(error);
+		}
+	}
+);
 
 const initialState = {
 	contacts: [],
@@ -36,6 +46,21 @@ export const contactSlice = createSlice({
 				state.contacts = action.payload;
 			})
 			.addCase(getContacts.rejected, (state, action) => {
+				state.isLoading = false;
+				state.isError = true;
+				state.isSuccess = false;
+				state.message = action.error;
+			})
+			.addCase(deleteContact.pending, (state) => {
+				state.isLoading = true;
+			})
+			.addCase(deleteContact.fulfilled, (state, action) => {
+				state.isLoading = false;
+				state.isError = false;
+				state.isSuccess = true;
+				state.deletedContact = action.payload;
+			})
+			.addCase(deleteContact.rejected, (state, action) => {
 				state.isLoading = false;
 				state.isError = true;
 				state.isSuccess = false;

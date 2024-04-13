@@ -1,13 +1,18 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import { Table } from "antd";
 import { useDispatch, useSelector } from "react-redux";
-import { createColor, getColors } from "../features/color/colorSlice";
+import {
+	createColor,
+	deleteColor,
+	getColors,
+} from "../features/color/colorSlice";
 import { Link } from "react-router-dom";
 import { FaEdit } from "react-icons/fa";
 import { MdDeleteOutline } from "react-icons/md";
 import { useFormik } from "formik";
 import * as Yup from "yup";
 import { toast } from "react-toastify";
+import CustomModel from "../components/CustomModel";
 
 const columns = [
 	{
@@ -43,7 +48,7 @@ const AllColors = () => {
 			formik.resetForm();
 			setTimeout(() => {
 				window.location.reload();
-			}, 1000);
+			}, 200);
 		},
 	});
 
@@ -72,15 +77,37 @@ const AllColors = () => {
 							<Link className='text-lg'>
 								<FaEdit />
 							</Link>
-							<Link className='text-xl'>
+							<button
+								onClick={() => showModal(totalColors[i]._id)}
+								className='text-xl border-0 bg-transparent'>
 								<MdDeleteOutline />
-							</Link>
+							</button>
 						</div>
 					</>
 				),
 			});
 		}
 	}
+
+	const [open, setOpen] = useState(false);
+	const [colorId, setColorId] = useState("");
+	const showModal = (e) => {
+		setOpen(true);
+		setColorId(e);
+	};
+
+	const hideModal = () => {
+		setOpen(false);
+	};
+
+	const deleteColorData = (e) => {
+		setOpen(false);
+		dispatch(deleteColor(e));
+
+		setTimeout(() => {
+			dispatch(getColors());
+		}, 200);
+	};
 	return (
 		<>
 			<section className='flex gap-5'>
@@ -112,6 +139,14 @@ const AllColors = () => {
 					<h2 className='text-xl my-4 font-bold'>Colors</h2>
 					<Table columns={columns} dataSource={data} />
 				</div>
+				<CustomModel
+					hideModal={hideModal}
+					open={open}
+					btnAction={() => {
+						deleteColorData(colorId);
+					}}
+					title='Are yo sure, do you want to delete this Color?'
+				/>
 			</section>
 		</>
 	);
