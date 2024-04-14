@@ -18,6 +18,7 @@ import AddProduct from "./pages/AddProduct";
 import AddBlogPost from "./pages/AddBlogPost";
 import AddBlogCategory from "./pages/AddBlogCategory";
 import Coupon from "./pages/Coupon";
+import ViewEnquiry from "./pages/ViewEnquiry";
 
 function App() {
 	return (
@@ -37,6 +38,7 @@ function App() {
 					<Route path='colors' element={<AllColors />} />
 					<Route path='orders' element={<Orders />} />
 					<Route path='enquiries' element={<Enquiries />} />
+					<Route path='enquiries/:id' element={<ViewEnquiry />} />
 					<Route path='all-blogs' element={<Blogs />} />
 					<Route path='add-blog' element={<AddBlogPost />} />
 					<Route

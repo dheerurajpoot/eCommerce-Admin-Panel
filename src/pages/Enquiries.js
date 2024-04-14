@@ -1,9 +1,15 @@
 import React, { useEffect, useState } from "react";
 import { Table } from "antd";
 import { useDispatch, useSelector } from "react-redux";
-import { deleteContact, getContacts } from "../features/contact/contactSlice";
+import {
+	deleteContact,
+	getContacts,
+	updateContact,
+} from "../features/contact/contactSlice";
 import { MdDeleteOutline } from "react-icons/md";
 import CustomModel from "../components/CustomModel";
+import { IoMdEye } from "react-icons/io";
+import { Link } from "react-router-dom";
 
 const columns = [
 	{
@@ -65,21 +71,40 @@ const Enquiries = () => {
 				status: (
 					<>
 						<div>
-							<select name='' id='' className='text-md'>
-								<option value=''>Set Status</option>
-								<option value=''>Received</option>
-								<option value=''>Solved</option>
-								<option value=''>Submitted</option>
+							<select
+								name=''
+								id=''
+								defaultValue={
+									totalContacts[i].status
+										? totalContacts[i].status
+										: "Submitted"
+								}
+								onChange={(e) =>
+									setEnquiryStatus(
+										e.target.value,
+										totalContacts[i]._id
+									)
+								}
+								className='text-md border px-3 py-1 rounded'>
+								<option value='Received'>Received</option>
+								<option value='In Progress'>In Progress</option>
+								<option value='Solved'>Solved</option>
+								<option value='Submitted'>Submitted</option>
 							</select>
 						</div>
 					</>
 				),
 				action: (
 					<>
-						<div>
+						<div className='flex'>
+							<Link
+								to={`/admin/enquiries/${totalContacts[i]?._id}`}
+								className='text-xl mx-2 hover:text-green-600'>
+								<IoMdEye />
+							</Link>
 							<button
 								onClick={() => showModal(totalContacts[i]._id)}
-								className='text-xl border-0 bg-transparent'>
+								className='text-xl border-0 hover:text-green-600 bg-transparent'>
 								<MdDeleteOutline />
 							</button>
 						</div>
@@ -88,6 +113,11 @@ const Enquiries = () => {
 			});
 		}
 	}
+
+	const setEnquiryStatus = (e, eId) => {
+		const data = { id: eId, enqData: e };
+		dispatch(updateContact(data));
+	};
 
 	const [open, setOpen] = useState(false);
 	const [contactId, setContactId] = useState("");
@@ -108,6 +138,7 @@ const Enquiries = () => {
 			dispatch(getContacts());
 		}, 200);
 	};
+
 	return (
 		<>
 			<div className='my-5'>

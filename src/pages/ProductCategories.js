@@ -76,12 +76,12 @@ const ProductCategories = () => {
 				action: (
 					<>
 						<div className='flex gap-3'>
-							<Link className='text-lg'>
+							<Link className='text-lg hover:text-green-600'>
 								<FaEdit />
 							</Link>
 							<button
 								onClick={() => showModal(totalCategory[i]._id)}
-								className='text-xl border-0 bg-transparent'>
+								className='text-xl border-0 hover:text-green-600 bg-transparent'>
 								<MdDeleteOutline />
 							</button>
 						</div>

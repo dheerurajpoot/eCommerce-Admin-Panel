@@ -95,7 +95,7 @@ const Coupon = () => {
 							</Link>
 							<button
 								onClick={() => showModal(totalCoupons[i]._id)}
-								className='text-xl border-0 bg-transparent'>
+								className='text-xl border-0 hover:text-green-600 bg-transparent'>
 								<MdDeleteOutline />
 							</button>
 						</div>
