@@ -2,9 +2,6 @@ import React, { useEffect } from "react";
 import { Table } from "antd";
 import { useDispatch, useSelector } from "react-redux";
 import { getOrders } from "../features/auth/authSlice";
-import { Link } from "react-router-dom";
-import { FaEdit } from "react-icons/fa";
-import { MdDeleteOutline } from "react-icons/md";
 import { getUsers } from "../features/customers/customerSlice";
 import Customers from "./Customers";
 

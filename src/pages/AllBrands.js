@@ -7,7 +7,6 @@ import {
 	resetState,
 } from "../features/brands/brandSlice";
 import { useDispatch, useSelector } from "react-redux";
-import { Link } from "react-router-dom";
 import { FaEdit } from "react-icons/fa";
 import { MdDeleteOutline } from "react-icons/md";
 import { useFormik } from "formik";
@@ -78,9 +77,11 @@ const AllBrands = () => {
 				action: (
 					<>
 						<div className='flex gap-3'>
-							<Link className='text-lg'>
+							<button
+								onClick={() => console.log(totalBrands[i]._id)}
+								className='text-xl border-0 bg-transparent'>
 								<FaEdit />
-							</Link>
+							</button>
 							<button
 								onClick={() => showModal(totalBrands[i]._id)}
 								className='text-xl border-0 bg-transparent'>
@@ -113,6 +114,9 @@ const AllBrands = () => {
 		}, 200);
 	};
 
+	const ABrand = useSelector((state) => state.brand.getABrand);
+	console.log(ABrand);
+
 	return (
 		<>
 			<section className='flex gap-5'>
@@ -133,7 +137,9 @@ const AllBrands = () => {
 							placeholder='Brand Name'
 						/>
 
-						<button className='bg-green-700 px-5  py-3 rounded text-white font-bold'>
+						<button
+							type='submit'
+							className='bg-green-700 px-5  py-3 rounded text-white font-bold'>
 							Add Brand
 						</button>
 					</form>

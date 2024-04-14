@@ -78,5 +78,11 @@ body{
   display: block;
   }
 
+  .updateInput{
+    padding: 5px 10px;
+    border: .5px solid gray;
+    border-radius: 5px;
+    width: 100%;
+  }
   .dropdown:hover .dropdown-content {display: block;}
   
