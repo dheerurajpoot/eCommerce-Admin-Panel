@@ -24,6 +24,16 @@ export const login = createAsyncThunk(
 		}
 	}
 );
+export const logOut = createAsyncThunk(
+	"auth/admin-logout",
+	async (thunkAPI) => {
+		try {
+			return await authService.logOut();
+		} catch (error) {
+			return thunkAPI.rejectWithValue(error);
+		}
+	}
+);
 
 export const getOrders = createAsyncThunk(
 	"order/get-orders",
@@ -53,6 +63,22 @@ export const authSlice = createSlice({
 				state.message = "Success";
 			})
 			.addCase(login.rejected, (state, action) => {
+				state.isLoading = false;
+				state.isError = true;
+				state.isSuccess = false;
+				state.message = action.error;
+			})
+			.addCase(logOut.pending, (state) => {
+				state.isLoading = true;
+			})
+			.addCase(logOut.fulfilled, (state, action) => {
+				state.isLoading = false;
+				state.isError = false;
+				state.isSuccess = true;
+				state.user = action.payload;
+				state.message = "Success";
+			})
+			.addCase(logOut.rejected, (state, action) => {
 				state.isLoading = false;
 				state.isError = true;
 				state.isSuccess = false;

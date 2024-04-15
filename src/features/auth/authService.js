@@ -19,9 +19,14 @@ const getOrders = async () => {
 		throw error;
 	}
 };
+const logOut = async () => {
+	const response = await axios.get(`${base_url}user/logout`);
+	return response.data;
+};
 
 const authService = {
 	login,
 	getOrders,
+	logOut,
 };
 export default authService;

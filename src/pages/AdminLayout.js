@@ -18,6 +18,7 @@ import { Layout, Menu, Button, theme } from "antd";
 import { useNavigate } from "react-router-dom";
 import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
+import { useSelector } from "react-redux";
 const { Header, Sider, Content } = Layout;
 const AdminLayout = () => {
 	const [collapsed, setCollapsed] = useState(false);
@@ -25,6 +26,13 @@ const AdminLayout = () => {
 		token: { colorBgContainer, borderRadiusLG },
 	} = theme.useToken();
 	const navigate = useNavigate();
+
+	const user = useSelector((state) => state.auth.user);
+
+	const handlelogOut = () => {
+		console.log("You have logged Out!");
+	};
+
 	return (
 		<Layout /* onContextMenu={(e) => e.preventDefault()} */>
 			<Sider trigger={null} collapsible collapsed={collapsed}>
@@ -181,39 +189,42 @@ const AdminLayout = () => {
 							height: 64,
 						}}
 					/>
-					<div className='pr-8 flex gap-5 justify-center items-center'>
+					<div className='pr-8 flex gap-2 justify-center items-center'>
 						<div className='relative mx-3 cursor-pointer'>
 							<span className='notification'>2</span>
 							<IoNotifications className='text-2xl' />
 						</div>
-						<div className='w-12 border bg-blue-950 rounded-full p-1'>
+						<div className='w-12 border bg-blue-950 rounded-full p-[4px]'>
 							{/* <img
 								className='w-[90%]'
 								src='./images/drstoreicon.png'
 								alt='user profile'
 							/> */}
 							<Link to={"/admin"}>
-								<h2 className='text-2xl text-white font-bold text-center'>
-									DR
+								<h2 className='text-3xl text-white font-bold text-center'>
+									{user.name[0]}
 								</h2>
 							</Link>
 						</div>
 
 						<div className='dropdown'>
 							<button className='dropbtn py-2'>
-								<p className='text-lg font-semibold'>
-									Dheeru Rajpoot <br />
-									<span className='text-sm font-light'>
-										rajpootdheeru90@gmail.com
+								<div className='flex flex-col'>
+									<span className='text-lg font-semibold leading-4'>
+										{user.name}
 									</span>
-								</p>
+
+									<span className='text-sm font-light'>
+										{user.email}
+									</span>
+								</div>
 							</button>
 							<div className='dropdown-content font-semibold'>
 								<Link to={"/"} className='drop-items'>
 									Profile
 								</Link>
 								<Link
-									to={"/sign-out"}
+									onClick={() => handlelogOut()}
 									className='drop-items border-t-2'>
 									Sign Out
 								</Link>

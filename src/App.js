@@ -19,6 +19,7 @@ import AddBlogPost from "./pages/AddBlogPost";
 import AddBlogCategory from "./pages/AddBlogCategory";
 import Coupon from "./pages/Coupon";
 import ViewEnquiry from "./pages/ViewEnquiry";
+import ViewOrder from "./pages/ViewOrder";
 
 function App() {
 	return (
@@ -37,6 +38,7 @@ function App() {
 					<Route path='coupon' element={<Coupon />} />
 					<Route path='colors' element={<AllColors />} />
 					<Route path='orders' element={<Orders />} />
+					<Route path='order/:id' element={<ViewOrder />} />
 					<Route path='enquiries' element={<Enquiries />} />
 					<Route path='enquiries/:id' element={<ViewEnquiry />} />
 					<Route path='all-blogs' element={<Blogs />} />

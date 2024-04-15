@@ -3,7 +3,7 @@ import { Table } from "antd";
 import { useDispatch, useSelector } from "react-redux";
 import { getOrders } from "../features/auth/authSlice";
 import { Link } from "react-router-dom";
-import { FaEdit } from "react-icons/fa";
+import { IoMdEye } from "react-icons/io";
 import { MdDeleteOutline } from "react-icons/md";
 
 const columns = [
@@ -12,7 +12,7 @@ const columns = [
 		dataIndex: "key",
 	},
 	{
-		title: "ID",
+		title: "Order ID",
 		dataIndex: "_id",
 	},
 	{
@@ -76,8 +76,10 @@ const Orders = () => {
 				action: (
 					<>
 						<div className='flex gap-3'>
-							<Link className='text-lg'>
-								<FaEdit />
+							<Link
+								to={`/admin/order/${getAllOrders[i]._id}`}
+								className='text-lg'>
+								<IoMdEye />
 							</Link>
 							<Link className='text-xl'>
 								<MdDeleteOutline />

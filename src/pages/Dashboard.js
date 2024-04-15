@@ -4,6 +4,11 @@ import { useDispatch, useSelector } from "react-redux";
 import { getOrders } from "../features/auth/authSlice";
 import { getUsers } from "../features/customers/customerSlice";
 import Customers from "./Customers";
+import { FcSalesPerformance } from "react-icons/fc";
+import { RiCustomerService2Line } from "react-icons/ri";
+import { HiMiniReceiptPercent } from "react-icons/hi2";
+import { FaSellsy } from "react-icons/fa";
+import { FaSitemap } from "react-icons/fa6";
 
 const columns = [
 	{
@@ -11,7 +16,7 @@ const columns = [
 		dataIndex: "key",
 	},
 	{
-		title: "ID",
+		title: "Order ID",
 		dataIndex: "_id",
 	},
 	{
@@ -73,52 +78,73 @@ const Dashboard = () => {
 			});
 		}
 	}
+	let totalOrdersAmount = 0;
 
+	getAllOrders.forEach((items) => {
+		totalOrdersAmount += items?.paymentIntent?.ammount;
+	});
 	return (
 		<>
 			<h2 className='text-xl font-bold'>Dashboard</h2>
 			<section>
 				<div className='flex justify-center items-center gap-10 my-8'>
-					<div className='w-[20%] shadow-lg border rounded flex justify-center items-center'>
+					<div className='w-[20%] shadow-lg border rounded flex justify-center gap-10 items-center'>
+						<div>
+							<FcSalesPerformance size={40} />
+						</div>
 						<div>
 							<p className='my-5 text-gray-400'>Total Sells</p>
 							<h3 className='text-2xl text-green-700 font-bold my-5'>
-								₹ 3878
+								{`₹${totalOrdersAmount}`}
 							</h3>
 						</div>
 					</div>
-					<div className='w-[20%] shadow-lg border rounded flex justify-center items-center'>
+					<div className='w-[20%] shadow-lg border rounded flex justify-center gap-10 items-center'>
+						<div>
+							<HiMiniReceiptPercent size={40} />
+						</div>
 						<div>
 							<p className='my-5 text-gray-400'>
 								Average Order Value
 							</p>
 							<h3 className='text-2xl font-bold text-green-700 my-5'>
-								₹ 378
+								{`₹${Math.floor(
+									totalOrdersAmount / getAllOrders.length
+								)}`}
 							</h3>
 						</div>
 					</div>
-					<div className='w-[20%] shadow-lg border rounded flex justify-center items-center'>
+					<div className='w-[20%] shadow-lg border rounded flex justify-center gap-10 items-center'>
 						<div>
+							<FaSellsy size={40} />
+						</div>
+						<div className='text-center'>
 							<p className='my-5 text-gray-400'>Total Orders</p>
-							<h3 className='text-2xl font-bold my-5'>
+							<h3 className='text-2xl text-green-700 font-bold my-5'>
 								{getAllOrders.length}
 							</h3>
 						</div>
 					</div>
-					<div className='w-[20%] shadow-lg border rounded flex justify-center items-center'>
+					<div className='w-[20%] shadow-lg border rounded flex justify-center gap-10 items-center'>
 						<div>
-							<p className='my-5 text-gray-400'>
+							<RiCustomerService2Line size={40} />
+						</div>
+						<div className='text-center'>
+							<p className='my-5  text-gray-400'>
 								Total Customers
 							</p>
-							<h3 className='text-2xl font-bold my-5'>
+							<h3 className='text-2xl text-green-700 font-bold my-5'>
 								{getAllCustomers.length}
 							</h3>
 						</div>
 					</div>
-					<div className='w-[20%] shadow-lg border rounded flex justify-center items-center'>
+					<div className='w-[20%] shadow-lg border rounded flex justify-center gap-10 items-center'>
 						<div>
+							<FaSitemap size={40} />
+						</div>
+						<div className='text-center'>
 							<p className='my-5 text-gray-400'>Total Products</p>
-							<h3 className='text-2xl font-bold my-5'>
+							<h3 className='text-2xl text-green-700 font-bold my-5'>
 								{getAllCustomers.length}
 							</h3>
 						</div>
