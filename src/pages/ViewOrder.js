@@ -2,7 +2,7 @@ import React, { useEffect } from "react";
 import { Link } from "react-router-dom";
 import { useLocation } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
-import { getOrders } from "../features/auth/authSlice";
+import { getOrders, updateOrderStatus } from "../features/auth/authSlice";
 import { FaCheckCircle } from "react-icons/fa";
 
 const ViewOrder = () => {
@@ -16,17 +16,14 @@ const ViewOrder = () => {
 
 	const allOrders = useSelector((state) => state.auth.orders);
 	const order = allOrders.find((order) => order._id === orderId);
-	console.log(order);
 	if (!order) {
 		// If order not found, return a message or component indicating that the order was not found
 		return <p>Order not found</p>;
 	}
 
-	const setOrderStatus = (e, oId) => {
-		const data = { id: oId, enqData: e };
-		// setTimeout(() => {
-		// 	dispatch(getContact(enqID));
-		// }, 100);
+	const setOrderStatus = (e) => {
+		const data = { id: orderId, orderStatus: e };
+		dispatch(updateOrderStatus(data));
 	};
 
 	return (
@@ -106,10 +103,7 @@ const ViewOrder = () => {
 												order ? order : "Processing"
 											}
 											onChange={(e) =>
-												setOrderStatus(
-													e.target.value,
-													orderId
-												)
+												setOrderStatus(e.target.value)
 											}
 											className='text-md border px-3 py-1 rounded'>
 											<option value='Delivered'>
