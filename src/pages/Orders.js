@@ -29,8 +29,8 @@ const columns = [
 		dataIndex: "orderStatus",
 	},
 	{
-		title: "Payment",
-		dataIndex: "payment",
+		title: "Product ID",
+		dataIndex: "productId",
 	},
 	{
 		title: "Ammount",
@@ -57,22 +57,24 @@ const Orders = () => {
 		dispatch(getOrders());
 	}, [dispatch]);
 
-	const getAllOrders = useSelector((state) => state.auth.orders);
+	const getAllOrders = useSelector((state) => state.auth?.orders);
 	const data = [];
-	for (let i = 0; i < getAllOrders.length; i++) {
+	for (let i = 0; i < getAllOrders?.length; i++) {
 		if (getAllOrders) {
 			data.push({
 				key: i + 1,
-				_id: getAllOrders[i]._id,
-				name: getAllOrders[i].orderBy.name,
-				product: getAllOrders[i].products.map((i, index) => {
+				_id: getAllOrders[i]?._id,
+				name: getAllOrders[i]?.shippingInfo?.name,
+				product: getAllOrders[i]?.orderItems?.map((i, index) => {
 					return <p key={index}>{i?.product?.title}</p>;
 				}),
-				payment: getAllOrders[i].paymentIntent.method,
-				id: getAllOrders[i].paymentIntent.id,
-				ammount: `₹ ${getAllOrders[i].paymentIntent.ammount}`,
-				orderStatus: getAllOrders[i].orderStatus,
-				date: new Date(getAllOrders[i].createdAt).toLocaleString(),
+				productId: getAllOrders[i]?.orderItems?.map((i, index) => {
+					return <p key={index}>{i?.product?._id}</p>;
+				}),
+				id: getAllOrders[i]?.paymentInfo?.razorpayPaymentId,
+				ammount: `₹ ${getAllOrders[i]?.priceAfterDiscount}`,
+				orderStatus: getAllOrders[i]?.orderStatus,
+				date: new Date(getAllOrders[i]?.createdAt).toLocaleString(),
 				action: (
 					<>
 						<div className='flex gap-3'>
