@@ -6,8 +6,6 @@ import ForgotPassword from "./pages/ForgotPassword";
 import AdminLayout from "./pages/AdminLayout";
 import Dashboard from "./pages/Dashboard";
 import Enquiries from "./pages/Enquiries";
-import Blogs from "./pages/Blogs";
-import BlogCategories from "./pages/BlogCategories";
 import Orders from "./pages/Orders";
 import AllProducts from "./pages/AllProducts";
 import ProductCategories from "./pages/ProductCategories";
@@ -15,8 +13,6 @@ import AllBrands from "./pages/AllBrands";
 import AllColors from "./pages/AllColors";
 import Customers from "./pages/Customers";
 import AddProduct from "./pages/AddProduct";
-import AddBlogPost from "./pages/AddBlogPost";
-import AddBlogCategory from "./pages/AddBlogCategory";
 import Coupon from "./pages/Coupon";
 import ViewEnquiry from "./pages/ViewEnquiry";
 import ViewOrder from "./pages/ViewOrder";
@@ -41,16 +37,6 @@ function App() {
 					<Route path='order/:id' element={<ViewOrder />} />
 					<Route path='enquiries' element={<Enquiries />} />
 					<Route path='enquiries/:id' element={<ViewEnquiry />} />
-					<Route path='all-blogs' element={<Blogs />} />
-					<Route path='add-blog' element={<AddBlogPost />} />
-					<Route
-						path='blog-categories'
-						element={<BlogCategories />}
-					/>
-					<Route
-						path='add-blog-category'
-						element={<AddBlogCategory />}
-					/>
 				</Route>
 			</Routes>
 		</Router>

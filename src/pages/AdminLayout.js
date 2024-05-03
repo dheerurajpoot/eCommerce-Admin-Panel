@@ -6,8 +6,6 @@ import { MdCategory } from "react-icons/md";
 import { SiBrandfolder } from "react-icons/si";
 import { IoIosColorFill } from "react-icons/io";
 import { RiListOrdered2 } from "react-icons/ri";
-import { MdArticle } from "react-icons/md";
-import { BiSolidCategoryAlt } from "react-icons/bi";
 import { BiSolidOffer } from "react-icons/bi";
 import { MdLiveHelp } from "react-icons/md";
 import { Link, Outlet } from "react-router-dom";
@@ -131,33 +129,7 @@ const AdminLayout = () => {
 								},
 							],
 						},
-						{
-							key: "Blog",
-							icon: <MdArticle />,
-							label: "Blog",
-							children: [
-								{
-									key: "add-blog",
-									icon: <MdArticle />,
-									label: "Add Blog Post",
-								},
-								{
-									key: "all-blogs",
-									icon: <MdArticle />,
-									label: "All Blogs",
-								},
-								{
-									key: "add-blog-category",
-									icon: <BiSolidCategoryAlt />,
-									label: "Add Category",
-								},
-								{
-									key: "blog-categories",
-									icon: <BiSolidCategoryAlt />,
-									label: "All Categories",
-								},
-							],
-						},
+
 						{
 							key: "enquiries",
 							icon: <MdLiveHelp />,
