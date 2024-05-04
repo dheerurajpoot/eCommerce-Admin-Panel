@@ -24,7 +24,6 @@ const Login = () => {
 		validationSchema: userSchema,
 		onSubmit: (values) => {
 			dispatch(login(values));
-			// alert(JSON.stringify(values, null, 2));
 		},
 	});
 	const { user, isLoading, isSuccess, isError, message } = useSelector(
@@ -33,6 +32,9 @@ const Login = () => {
 	useEffect(() => {
 		if (isSuccess) {
 			navigate("admin");
+			setTimeout(() => {
+				window.location.reload();
+			}, 1200);
 		} else {
 			navigate("");
 		}

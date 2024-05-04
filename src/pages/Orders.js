@@ -4,7 +4,6 @@ import { useDispatch, useSelector } from "react-redux";
 import { getOrders } from "../features/auth/authSlice";
 import { Link } from "react-router-dom";
 import { IoMdEye } from "react-icons/io";
-import { MdDeleteOutline } from "react-icons/md";
 
 const columns = [
 	{
@@ -79,12 +78,9 @@ const Orders = () => {
 					<>
 						<div className='flex gap-3'>
 							<Link
-								to={`/admin/order/${getAllOrders[i]._id}`}
+								to={`/admin/order/${getAllOrders[i]?._id}`}
 								className='text-lg'>
 								<IoMdEye />
-							</Link>
-							<Link className='text-xl'>
-								<MdDeleteOutline />
 							</Link>
 						</div>
 					</>

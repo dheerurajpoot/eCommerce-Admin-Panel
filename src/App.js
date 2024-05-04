@@ -16,6 +16,7 @@ import AddProduct from "./pages/AddProduct";
 import Coupon from "./pages/Coupon";
 import ViewEnquiry from "./pages/ViewEnquiry";
 import ViewOrder from "./pages/ViewOrder";
+import { ProtectedRoutes } from "./routing/ProtectedRoutes";
 
 function App() {
 	return (
@@ -24,7 +25,13 @@ function App() {
 				<Route path='/' element={<Login />} />
 				<Route path='/reset-password' element={<ResetPassword />} />
 				<Route path='forgot-password' element={<ForgotPassword />} />
-				<Route path='/admin' element={<AdminLayout />}>
+				<Route
+					path='/admin'
+					element={
+						<ProtectedRoutes>
+							<AdminLayout />
+						</ProtectedRoutes>
+					}>
 					<Route index element={<Dashboard />} />
 					<Route path='customers' element={<Customers />} />
 					<Route path='products' element={<AllProducts />} />

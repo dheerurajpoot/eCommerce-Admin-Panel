@@ -14,7 +14,7 @@ import { BsBoxArrowInRight } from "react-icons/bs";
 import { IoNotifications } from "react-icons/io5";
 import { Layout, Menu, Button, theme } from "antd";
 import { useNavigate } from "react-router-dom";
-import { ToastContainer } from "react-toastify";
+import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import { useSelector } from "react-redux";
 const { Header, Sider, Content } = Layout;
@@ -28,7 +28,12 @@ const AdminLayout = () => {
 	const user = useSelector((state) => state.auth.user);
 
 	const handlelogOut = () => {
-		console.log("You have logged Out!");
+		localStorage.clear();
+
+		setTimeout(() => {
+			window.location.reload();
+		}, 1200);
+		toast.warning("Logged out Succuessfully!");
 	};
 
 	return (
@@ -174,7 +179,7 @@ const AdminLayout = () => {
 							/> */}
 							<Link to={"/admin"}>
 								<h2 className='text-3xl text-white font-bold text-center'>
-									{user.name[0]}
+									{user?.name[0]}
 								</h2>
 							</Link>
 						</div>
@@ -183,11 +188,11 @@ const AdminLayout = () => {
 							<button className='dropbtn py-2'>
 								<div className='flex flex-col'>
 									<span className='text-lg font-semibold leading-4'>
-										{user.name}
+										{user?.name}
 									</span>
 
 									<span className='text-sm font-light'>
-										{user.email}
+										{user?.email}
 									</span>
 								</div>
 							</button>
@@ -196,7 +201,7 @@ const AdminLayout = () => {
 									Profile
 								</Link>
 								<Link
-									onClick={() => handlelogOut()}
+									onClick={handlelogOut}
 									className='drop-items border-t-2'>
 									Sign Out
 								</Link>

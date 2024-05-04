@@ -1,12 +1,14 @@
 import React, { useEffect } from "react";
 import { Link } from "react-router-dom";
-import { useLocation } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { getOrders, updateOrderStatus } from "../features/auth/authSlice";
 import { FaCheckCircle } from "react-icons/fa";
+import { IoMdArrowRoundBack } from "react-icons/io";
 
 const ViewOrder = () => {
 	const location = useLocation();
+	const navigate = useNavigate();
 	const orderId = location.pathname.split("/")[3];
 
 	const dispatch = useDispatch();
@@ -14,23 +16,29 @@ const ViewOrder = () => {
 		dispatch(getOrders());
 	}, [dispatch]);
 
-	const allOrders = useSelector((state) => state.auth.orders);
+	const allOrders = useSelector((state) => state.auth?.orders);
 	const order = allOrders.find((order) => order._id === orderId);
 	if (!order) {
-		// If order not found, return a message or component indicating that the order was not found
 		return <p>Order not found</p>;
 	}
-
 	const setOrderStatus = (e) => {
 		const data = { id: orderId, orderStatus: e };
 		dispatch(updateOrderStatus(data));
 	};
-
+	let shippingCharge = 50;
+	const goBack = () => {
+		navigate(-1);
+	};
 	return (
 		<>
 			<section className='bg-[#edf1f7]'>
 				<div className='py-16 bg-blueGray-100'>
 					<div className='container px-4 mx-auto'>
+						<button
+							onClick={goBack}
+							className='rounded flex items-center justify-center shadow border px-3 py-2 text-lg'>
+							<IoMdArrowRoundBack /> Back To Enquiries
+						</button>
 						<div className='pb-9 mb-10 lg:mb-11 text-center border-b border-black border-opacity-5'>
 							<h2 className='text-5xl xl:text-5xl leading-normal font-heading font-medium text-center'>
 								Order Details
@@ -59,7 +67,29 @@ const ViewOrder = () => {
 							</div>
 						</div>
 						<div className='p-8 xl:py-14 xl:px-16 mb-14 xl:mb-16 bg-white rounded-3xl'>
-							{order?.products?.map((product, index) => (
+							<div className='mb-10 mx-8 flex gap-10 border p-10'>
+								<div className='flex text-lg gap-2'>
+									<span>Name:</span>
+									<p className='font-semibold'>
+										Dheeru Rapoot
+									</p>
+								</div>
+								<div className='flex text-lg gap-2'>
+									<span>Mobile:</span>
+									<p className='font-semibold'>
+										{order?.user?.mobile}
+									</p>
+								</div>
+								<div className='flex text-lg gap-2'>
+									<span>Address:</span>
+									<p className='font-semibold'>
+										{`${order?.shippingInfo?.address},`}{" "}
+										<br />
+										{`${order?.shippingInfo?.city}, ${order?.shippingInfo?.state}, ${order?.shippingInfo?.country}, ${order?.shippingInfo?.pincode}`}
+									</p>
+								</div>
+							</div>
+							{order?.orderItems?.map((product, index) => (
 								<div
 									key={index}
 									className='lg:flex lg:items-center lg:justify-between pb-7 xl:pb-9 mb-7 xl:mb-9 border-b border-black border-opacity-5'>
@@ -95,6 +125,7 @@ const ViewOrder = () => {
 											</div>
 										</div>
 									</div>
+
 									<div>
 										<select
 											name='orderStatus'
@@ -121,6 +152,9 @@ const ViewOrder = () => {
 											<option value='Shipped'>
 												Shipped
 											</option>
+											<option value='Ordered'>
+												Ordered
+											</option>
 										</select>
 									</div>
 									<div className='lg:w-4/12 xl:w-3/12 2xl:w-2/12'>
@@ -130,13 +164,14 @@ const ViewOrder = () => {
 													Qty:
 												</span>
 												<span className='text-lg text-gray-400 font-body'>
-													{product?.count}
+													{product?.quantity}
 												</span>
 											</p>
 											<p className='flex items-center text-sm text-blue-500 font-heading font-medium'>
 												<span className='mr-2'>₹</span>
 												<span className='text-lg xl:text-xl'>
-													{product?.product?.price}
+													{product?.product?.price *
+														product?.quantity}
 												</span>
 											</p>
 										</div>
@@ -156,7 +191,7 @@ const ViewOrder = () => {
 										<div className='relative flex items-center justify-between py-4 px-10 leading-8 bg-white bg-opacity-50 font-medium rounded-3xl'>
 											<div className='absolute left-3 flex justify-center items-center w-20 h-20 bg-white rounded-full'>
 												<div className='flex justify-center items-center w-11 h-11 text-xl text-white font-bold bg-blue-500 rounded-full'>
-													{order.products.length}
+													{order?.orderItems?.length}
 												</div>
 											</div>
 											<span className='ml-16'>
@@ -172,7 +207,7 @@ const ViewOrder = () => {
 													₹
 												</span>
 												<span className='text-xl'>
-													50
+													{shippingCharge}
 												</span>
 											</span>
 										</div>
@@ -185,10 +220,8 @@ const ViewOrder = () => {
 													₹
 												</span>
 												<span className='text-xl'>
-													{
-														order.paymentIntent
-															.ammount
-													}
+													{order?.priceAfterDiscount +
+														shippingCharge}
 												</span>
 											</span>
 										</div>

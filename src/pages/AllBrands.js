@@ -115,7 +115,6 @@ const AllBrands = () => {
 	};
 
 	const ABrand = useSelector((state) => state.brand.getABrand);
-	console.log(ABrand);
 
 	return (
 		<>
