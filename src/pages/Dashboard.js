@@ -58,8 +58,10 @@ const Dashboard = () => {
 		dispatch(getUsers());
 	}, [dispatch]);
 
-	const getAllOrders = useSelector((state) => state.auth?.orders);
+	const totalOrders = useSelector((state) => state.auth?.orders);
+	const getAllOrders = [...totalOrders].reverse();
 	const getAllCustomers = useSelector((state) => state.customer?.customers);
+
 	const data = [];
 	for (let i = 0; i < getAllOrders?.length; i++) {
 		if (getAllOrders) {

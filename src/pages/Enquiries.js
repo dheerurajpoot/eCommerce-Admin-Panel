@@ -55,7 +55,9 @@ const Enquiries = () => {
 		dispatch(getContacts());
 	}, [dispatch]);
 
-	const totalContacts = useSelector((state) => state.contact.contacts);
+	const allEnquiry = useSelector((state) => state.contact.contacts);
+	const totalContacts = [...allEnquiry].reverse();
+
 	const data = [];
 	for (let i = 0; i < totalContacts.length; i++) {
 		if (totalContacts) {

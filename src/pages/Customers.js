@@ -43,7 +43,9 @@ const Customers = () => {
 		dispatch(getUsers());
 	}, [dispatch]);
 
-	const allCustomers = useSelector((state) => state.customer.customers);
+	const Customers = useSelector((state) => state.customer.customers);
+	const allCustomers = [...Customers].reverse();
+
 	const data = [];
 	for (let i = 0; i < allCustomers.length; i++) {
 		if (allCustomers) {

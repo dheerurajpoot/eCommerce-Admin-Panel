@@ -56,7 +56,8 @@ const Orders = () => {
 		dispatch(getOrders());
 	}, [dispatch]);
 
-	const getAllOrders = useSelector((state) => state.auth?.orders);
+	const userAllOrders = useSelector((state) => state.auth?.orders);
+	const getAllOrders = [...userAllOrders].reverse();
 	const data = [];
 	for (let i = 0; i < getAllOrders?.length; i++) {
 		if (getAllOrders) {
