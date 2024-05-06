@@ -130,30 +130,27 @@ const ViewOrder = () => {
 										<select
 											name='orderStatus'
 											id='orderStatus'
-											defaultValue={
-												order ? order : "Processing"
-											}
 											onChange={(e) =>
 												setOrderStatus(e.target.value)
 											}
 											className='text-md border px-3 py-1 rounded'>
-											<option value='Delivered'>
-												Delivered
+											<option value='#'>
+												Update Status
 											</option>
-											<option value='Dispatched'>
-												Dispatched
-											</option>
-											<option value='Cancelled'>
-												Cancelled
+											<option value='Ordered'>
+												Ordered
 											</option>
 											<option value='Processing'>
 												Processing
 											</option>
-											<option value='Shipped'>
-												Shipped
+											<option value='Dispatched'>
+												Dispatched
 											</option>
-											<option value='Ordered'>
-												Ordered
+											<option value='Delivered'>
+												Delivered
+											</option>
+											<option value='Cancelled'>
+												Cancelled
 											</option>
 										</select>
 									</div>
