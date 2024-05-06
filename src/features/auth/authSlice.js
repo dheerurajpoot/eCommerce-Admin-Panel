@@ -94,12 +94,18 @@ export const authSlice = createSlice({
 				state.isSuccess = true;
 				state.updatedOrder = action.payload;
 				state.message = "Success";
+				if (state.isSuccess === true) {
+					toast.success("Status Updated Succuessfully");
+				}
 			})
 			.addCase(updateOrderStatus.rejected, (state, action) => {
 				state.isLoading = false;
 				state.isError = true;
 				state.isSuccess = false;
 				state.message = action.error;
+				if (state.isError === true) {
+					toast.error("Something Went Wrong");
+				}
 			})
 			.addCase(getOrders.pending, (state) => {
 				state.isLoading = true;
