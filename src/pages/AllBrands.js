@@ -114,8 +114,6 @@ const AllBrands = () => {
 		}, 200);
 	};
 
-	const ABrand = useSelector((state) => state.brand.getABrand);
-
 	return (
 		<>
 			<section className='flex gap-5'>

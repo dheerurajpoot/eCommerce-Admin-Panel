@@ -11,9 +11,13 @@ const columns = [
 		dataIndex: "key",
 	},
 	{
+		title: "User Id",
+		dataIndex: "id",
+	},
+	{
 		title: "Name",
 		dataIndex: "name",
-		sorter: (a, b) => a.name.length - b.name.length,
+		sorter: (a, b) => a.name?.length - b.name?.length,
 	},
 	{
 		title: "Email",
@@ -28,8 +32,8 @@ const columns = [
 		dataIndex: "role",
 	},
 	{
-		title: "Address",
-		dataIndex: "address",
+		title: "Registered At",
+		dataIndex: "registerDate",
 	},
 	{
 		title: "Action",
@@ -43,24 +47,27 @@ const Customers = () => {
 		dispatch(getUsers());
 	}, [dispatch]);
 
-	const Customers = useSelector((state) => state.customer.customers);
+	const Customers = useSelector((state) => state?.customer?.customers);
 	const allCustomers = [...Customers].reverse();
 
 	const data = [];
-	for (let i = 0; i < allCustomers.length; i++) {
+	for (let i = 0; i < allCustomers?.length; i++) {
 		if (allCustomers) {
 			data.push({
 				key: i + 1,
-				name: allCustomers[i].name,
-				email: allCustomers[i].email,
-				mobile: allCustomers[i].mobile,
-				role: allCustomers[i].role,
-				address: allCustomers[i].address,
+				id: allCustomers[i]?._id,
+				name: allCustomers[i]?.name,
+				email: allCustomers[i]?.email,
+				mobile: allCustomers[i]?.mobile,
+				role: allCustomers[i]?.role,
+				registerDate: new Date(
+					allCustomers[i]?.createdAt
+				).toDateString(),
 				action: (
 					<>
 						<div className='flex gap-3'>
 							<button
-								onClick={() => showModal(allCustomers[i]._id)}
+								onClick={() => showModal(allCustomers[i]?._id)}
 								className='text-xl border-0 hover:text-green-600 bg-transparent'>
 								<MdDeleteOutline />
 							</button>

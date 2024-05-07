@@ -48,7 +48,7 @@ const ViewOrder = () => {
 							<div className='lg:flex w-full lg:w-7/12 mb-14 lg:mb-0'>
 								<div className='flex justify-center sm:justify-start items-center mb-3 lg:mb-0'>
 									<h3 className='mr-3 lg:mr-7 text-lg xl:text-xl font-heading font-medium'>
-										Status:
+										Payment Status:
 									</h3>
 
 									<FaCheckCircle
@@ -57,7 +57,11 @@ const ViewOrder = () => {
 									/>
 								</div>
 								<h3 className='text-lg xl:text-xl font-heading font-medium text-center sm:text-left'>
-									Payment completed successfully!
+									{order?.paymentInfo &&
+									order?.paymentInfo?.razorpayPaymentId !==
+										"Cash On Delivery"
+										? "Payment completed successfully!"
+										: "Cash On Delivery!"}
 								</h3>
 							</div>
 							<div className='w-full lg:w-5/12'>
@@ -71,7 +75,7 @@ const ViewOrder = () => {
 								<div className='flex text-lg gap-2'>
 									<span>Name:</span>
 									<p className='font-semibold'>
-										Dheeru Rapoot
+										{order?.user?.name}
 									</p>
 								</div>
 								<div className='flex text-lg gap-2'>
@@ -217,8 +221,7 @@ const ViewOrder = () => {
 													₹
 												</span>
 												<span className='text-xl'>
-													{order?.priceAfterDiscount +
-														shippingCharge}
+													{order?.totalPrice}
 												</span>
 											</span>
 										</div>
