@@ -9,6 +9,7 @@ import { RiCustomerService2Line } from "react-icons/ri";
 import { HiMiniReceiptPercent } from "react-icons/hi2";
 import { FaSellsy } from "react-icons/fa";
 import { FaSitemap } from "react-icons/fa6";
+import { getProducts } from "../features/products/productSlice";
 
 const columns = [
 	{
@@ -56,11 +57,13 @@ const Dashboard = () => {
 	useEffect(() => {
 		dispatch(getOrders());
 		dispatch(getUsers());
+		dispatch(getProducts());
 	}, [dispatch]);
 
 	const totalOrders = useSelector((state) => state.auth?.orders);
 	const getAllOrders = [...totalOrders].reverse();
 	const getAllCustomers = useSelector((state) => state.customer?.customers);
+	const totalProduct = useSelector((state) => state.product.products);
 
 	const data = [];
 	for (let i = 0; i < getAllOrders?.length; i++) {
@@ -113,7 +116,7 @@ const Dashboard = () => {
 							</p>
 							<h3 className='text-2xl font-bold text-green-700 my-5'>
 								{`₹${Math.floor(
-									totalOrdersAmount / getAllOrders.length
+									totalOrdersAmount / getAllOrders?.length
 								)}`}
 							</h3>
 						</div>
@@ -125,7 +128,7 @@ const Dashboard = () => {
 						<div className='text-center'>
 							<p className='my-5 text-gray-400'>Total Orders</p>
 							<h3 className='text-2xl text-green-700 font-bold my-5'>
-								{getAllOrders.length}
+								{getAllOrders?.length}
 							</h3>
 						</div>
 					</div>
@@ -138,7 +141,7 @@ const Dashboard = () => {
 								Total Customers
 							</p>
 							<h3 className='text-2xl text-green-700 font-bold my-5'>
-								{getAllCustomers.length}
+								{getAllCustomers?.length}
 							</h3>
 						</div>
 					</div>
@@ -149,7 +152,7 @@ const Dashboard = () => {
 						<div className='text-center'>
 							<p className='my-5 text-gray-400'>Total Products</p>
 							<h3 className='text-2xl text-green-700 font-bold my-5'>
-								{getAllCustomers.length}
+								{totalProduct?.length}
 							</h3>
 						</div>
 					</div>
