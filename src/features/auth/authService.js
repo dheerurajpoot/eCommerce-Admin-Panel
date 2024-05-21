@@ -23,7 +23,11 @@ const updateOrderStatus = async (orderData) => {
 	try {
 		const response = await axios.put(
 			`${base_url}user/orders/order-status/${orderData.id}`,
-			{ id: orderData.id, status: orderData.orderStatus },
+			{
+				id: orderData?.id,
+				status: orderData?.orderStatus,
+				email: orderData?.email,
+			},
 			config
 		);
 		return response.data;

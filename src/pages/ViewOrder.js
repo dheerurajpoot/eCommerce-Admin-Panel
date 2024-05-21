@@ -22,7 +22,7 @@ const ViewOrder = () => {
 		return <p>Order not found</p>;
 	}
 	const setOrderStatus = (e) => {
-		const data = { id: orderId, orderStatus: e };
+		const data = { id: orderId, orderStatus: e, email: order?.user?.email };
 		dispatch(updateOrderStatus(data));
 	};
 	let shippingCharge = 50;
