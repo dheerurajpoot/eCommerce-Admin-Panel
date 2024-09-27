@@ -6,6 +6,7 @@ import * as Yup from "yup";
 import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import { login } from "../features/auth/authSlice";
+import { toast } from "react-toastify";
 
 const Login = () => {
 	const dispatch = useDispatch();
@@ -39,6 +40,7 @@ const Login = () => {
 			navigate("");
 		}
 	}, [user, isLoading, isSuccess, isError, dispatch, navigate]);
+
 	return (
 		<>
 			<section className='login'>
@@ -56,9 +58,13 @@ const Login = () => {
 								Log in to Lesshopy admin
 							</h1>
 							<div>
-								{message.message === "Rejected"
-									? "You are not an Admin"
-									: ""}
+								{isError ? (
+									<span className='text-red-600'>
+										{message}
+									</span>
+								) : (
+									""
+								)}
 							</div>
 							<form
 								className='space-y-4 md:space-y-6'
