@@ -5,6 +5,9 @@ import { config } from "../../utils/axiosconfig";
 const login = async (user) => {
 	const response = await axios.post(`${base_url}user/admin-login`, user, {
 		withCredentials: true,
+		headers: {
+			"Content-Type": "application/json",
+		},
 	});
 	if (response.data) {
 		localStorage.setItem("user", JSON.stringify(response.data));
